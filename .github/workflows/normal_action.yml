@@ -18,10 +18,6 @@ jobs:
             - name: Run API
               # make the api log to a file
               run: github_actions_test
-    commit-and-push:
-        needs: setup-and-run
-        runs-on: ubuntu-latest
-        steps:
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
