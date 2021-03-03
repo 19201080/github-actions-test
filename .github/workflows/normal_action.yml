@@ -22,12 +22,14 @@ jobs:
         needs: setup-and-run
         runs-on: ubuntu-latest
         steps:
-            - name: Commit changes
-              run: |
-                  git config --local user.email 'actions@github.com'
-                  git config --local user.name 'github-actions'
-                  git add files/
-                  git commit -m 'Update the reports'
-                  git push origin main
-
+            - name: push
+              uses: github-actions-x/commit@v2.7
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  push-branch: 'main'
+                  commit-message: 'Update the reports'
+                  force-add: true
+                  files: files/
+                  name: github-actions
+                  email: actions@github.com
 
