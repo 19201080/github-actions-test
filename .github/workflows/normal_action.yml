@@ -25,7 +25,7 @@ jobs:
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  github-token: ${{ secrets.SECRET_TOKEN }}
                   push-branch: 'main'
                   commit-message: 'Update the reports'
                   force-add: true
