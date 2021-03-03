@@ -1,0 +1,37 @@
+name: normal-action
+
+on:
+    schedule:
+        - cron: '0 0 * * *'
+
+jobs:
+    setup-and-run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+            - name: Set up python
+              uses: actions/setup-python@v2
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements_dev.txt
+                  pip install .
+            - name: Run API
+              # make the api log to a file
+              run: github_actions_test
+    commit-and-push:
+        needs: setup-and-run
+        runs-on: ubuntu-latest
+        if: ${{ files_have_changed }}
+        steps:
+            - name: Commit changes
+              run: |
+                  git config --local user.email 'actions@github.com'
+                  git config --local user.name 'github-actions'
+                  git add data.* individual_reports/
+                  git commit -m 'Update the reports'
+                  # check the wording for git push
+                  git push origin main
+
+
