@@ -23,7 +23,6 @@ jobs:
     commit-and-push:
         needs: setup-and-run
         runs-on: ubuntu-latest
-        if: ${{ files_have_changed }}
         steps:
             - name: Commit changes
               run: |
