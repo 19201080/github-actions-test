@@ -2,7 +2,7 @@ name: warning-action
 
 on:
     schedule:
-        - cron: '*/5 * * * *'
+        - cron: '*/6 * * * *'
 
 jobs:
     setup-and-run:
