@@ -26,9 +26,8 @@ jobs:
               run: |
                   git config --local user.email 'actions@github.com'
                   git config --local user.name 'github-actions'
-                  git add data.* individual_reports/
+                  git add files/
                   git commit -m 'Update the reports'
-                  # check the wording for git push
                   git push origin main
 
 
