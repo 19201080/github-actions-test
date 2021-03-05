@@ -31,6 +31,7 @@ def create_file(message=None):
     # now = datetime.now().isoformat().split('.')[0]
     now = 'test_file'
     dir_path = get_path_from_root(DEST_DIRECTORY)
+    logger.info(f'dir path location: {dir_path}')
 
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
@@ -51,6 +52,7 @@ def main(warning):
         level=logging.DEBUG,
         # filename=get_path_from_root(LOG_FILE),
         handlers=[logging.FileHandler(get_path_from_root(LOG_FILE)), logging.StreamHandler()])
+    logger.info(f'log file location: {get_path_from_root(LOG_FILE)}')
     log_stuff(warning)
     message = 'warning on' if warning else 'warning off'
     create_file(message)
