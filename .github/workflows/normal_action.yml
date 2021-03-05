@@ -30,7 +30,7 @@ jobs:
                   echo "::set-env name=GIT_STATUS::$(git status)"
             - name: any new file
               env:
-                NEW_FILES: ${{ !contains(env.GIT_STATUS, "nothing to commit") }}
+                NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
               run: |
                   echo "env.GIT_STATUS"
                   echo "$GIT_STATUS"
