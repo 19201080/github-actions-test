@@ -32,10 +32,9 @@ jobs:
                   push-branch: 'main'
                   commit-message: 'Update the reports'
                   force-add: 'true'
-                  files: files/test_file
+                  files: files/
                   name: github-actions
                   email: actions@github.com
             - name: git status
               run: |
                   git status
-
