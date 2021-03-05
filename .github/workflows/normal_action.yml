@@ -25,11 +25,17 @@ jobs:
                   cd files
                   ls -al
                   cd ..
-            - name: git info
+            - name: save git status
               run: |
-                  git status
-                  git config --list
-                  git log
+                  echo "::set-env name=GIT_STATUS::$(git status)"
+            - name: any new file
+              env:
+                NEW_FILES: ${{ !contains(env.GIT_STATUS, "nothing to commit") }}
+              run: |
+                  echo "env.GIT_STATUS"
+                  echo "$GIT_STATUS"
+                  echo "env.NEW_FILES"
+                  echo "$NEW_FILES"
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
