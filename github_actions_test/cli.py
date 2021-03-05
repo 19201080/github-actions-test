@@ -46,7 +46,11 @@ def create_file(message=None):
 def main(warning):
     if os.path.exists(log_path := get_path_from_root(LOG_FILE)):
         os.remove(log_path)
-    logging.basicConfig(format=LOG_FORMAT, level=logging.DEBUG, filename=get_path_from_root(LOG_FILE))
+    logging.basicConfig(
+        format=LOG_FORMAT,
+        level=logging.DEBUG,
+        # filename=get_path_from_root(LOG_FILE),
+        handlers=[logging.FileHandler(get_path_from_root(LOG_FILE)), logging.StreamHandler()])
     log_stuff(warning)
     message = 'warning on' if warning else 'warning off'
     create_file(message)
