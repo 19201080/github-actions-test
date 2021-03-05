@@ -25,7 +25,7 @@ jobs:
                   push-branch: 'main'
                   commit-message: 'Update the reports'
                   force-add: 'true'
-                  files: log.log files/
+                  files: files/test_file
                   name: github-actions
                   email: actions@github.com
 
