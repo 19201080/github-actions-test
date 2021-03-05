@@ -1,44 +1,15 @@
 """Console script for github_actions_test."""
-from datetime import datetime
 import logging
 import os
-import random
 import sys
 
 import click
 
+from github_actions_test.log.stuff_logger import log_stuff
+from github_actions_test.utils import get_path_from_root, LOG_FILE, LOG_FORMAT
+from github_actions_test.file_creator import create_file
+
 logger = logging.getLogger(__name__)
-LOG_FORMAT = ('%(asctime)-15s [%(levelname)-7s]: '
-              '%(message)s (%(filename)s:%(lineno)s)')
-ROOT_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEST_DIRECTORY = 'files'
-LOG_FILE = 'log.log'
-
-
-def get_path_from_root(tail, root=ROOT_DIRECTORY):
-    return os.path.join(root, tail)
-
-
-def log_stuff(warning):
-    levels = [logging.INFO, logging.DEBUG]
-    if warning:
-        levels.append(logging.WARNING)
-    for _ in range(10):
-        logger.log(levels[random.randint(0, len(levels) - 1)], 'message')
-
-
-def create_file(message=None):
-    now = datetime.now().isoformat().split('.')[0]
-    dir_path = get_path_from_root(DEST_DIRECTORY)
-    logger.info(f'dir path location: {dir_path}')
-
-    if not os.path.isdir(dir_path):
-        os.mkdir(dir_path)
-
-    with open(get_path_from_root(now, dir_path), 'w') as f:
-        f.write(now + '\n')
-        if message:
-            f.write(message)
 
 
 @click.command()
