@@ -54,7 +54,7 @@ jobs:
                   echo "env.WARNING_IN_LOG"
                   echo "$WARNING_IN_LOG"
     commit-and-push:
-        needs: set-env-variables
+        needs: setup-and-run
         runs-on: ubuntu-latest
         steps:
             - name: push
@@ -69,7 +69,7 @@ jobs:
                   name: github-actions
                   email: actions@github.com
     send-email:
-        needs: set-env-variables
+        needs: setup-and-run
         runs-on: ubuntu-latest
         steps:
             - name: send email
