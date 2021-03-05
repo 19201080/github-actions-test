@@ -23,10 +23,10 @@ jobs:
                   pip install .
             - name: log flags
               run: |
-                  echo "${{ github.events.inputs.flags }}"
+                  echo ${{ github.event.inputs.flags }}
             - name: Run API
               run: |
-                  python -m github_actions_test.cli "${{ github.events.inputs.flags }}"
+                  python -m github_actions_test.cli ${{ github.event.inputs.flags }}
             - name: save git status
               run: |
                   echo "GIT_STATUS<<EOF" >> $GITHUB_ENV
