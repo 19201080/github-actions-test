@@ -51,6 +51,7 @@ jobs:
                   echo "$WARNING_IN_LOG"
             - name: push
               uses: github-actions-x/commit@v2.7
+              if: env.NEW_FILES
               with:
                   github-token: ${{ secrets.SECRET_TOKEN }}
                   push-branch: 'main'
@@ -59,3 +60,7 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
+            - name: send email
+              if: env.WARNING_IN_LOG
+              run: |
+                  echo "warnings in log -> send email step running"
