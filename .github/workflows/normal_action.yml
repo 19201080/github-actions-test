@@ -25,6 +25,10 @@ jobs:
                   cd files
                   ls -al
                   cd ..
+            - name: git status
+              run: |
+                  apk --update --no-cache add git git-lfs
+                  git status
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
@@ -35,6 +39,3 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
-            - name: git status
-              run: |
-                  git status
