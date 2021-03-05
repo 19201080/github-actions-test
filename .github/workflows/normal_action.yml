@@ -25,7 +25,11 @@ jobs:
                   cd files
                   ls -al
                   cd ..
+            - name: git info
+              run: |
                   git status
+                  git config --list
+                  git log
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
