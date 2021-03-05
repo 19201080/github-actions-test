@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 @click.command()
 @click.option('--warning/--no-warning', '-w', default=False)
-def main(warning):
+@click.option('--file/--no-file', ' /-n', default=True)
+def main(warning, file):
     if os.path.exists(log_path := get_path_from_root(LOG_FILE)):
         os.remove(log_path)
     logging.basicConfig(
@@ -25,7 +26,8 @@ def main(warning):
     logger.info(f'log file location: {get_path_from_root(LOG_FILE)}')
     log_stuff(warning)
     message = 'warning on' if warning else 'warning off'
-    create_file(message)
+    if file:
+        create_file(message)
 
 
 if __name__ == "__main__":
