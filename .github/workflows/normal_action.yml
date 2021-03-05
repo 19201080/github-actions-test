@@ -28,11 +28,11 @@ jobs:
                   cat log.log >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
             - name: check for warnings in log
-              env:
-                  WARNING_IN_LOG: ${{ contains($(cat log.log), 'WARNING') }}
+              run: |
+                  echo "WARNING_IN_LOG=${{ contains(env.LOG_CONTENT, 'WARNING') }}" >> $GITHUB_ENV
             - name: check for new files
-              env:
-                  NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
+              run: |
+                  echo "NEW_FILES=${{ !contains(env.GIT_STATUS, 'nothing to commit') }}" >> $GITHUB_ENV
             - name: log all env variables
               run: |
                   echo "env.GIT_STATUS"
