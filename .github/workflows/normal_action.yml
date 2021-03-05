@@ -27,7 +27,7 @@ jobs:
                   cd ..
             - name: save git status
               run: |
-                  echo "::set-env name=GIT_STATUS::$(git status)"
+                  echo "GIT_STATUS=$(git status)" >> $GITHUB_ENV
             - name: any new file
               env:
                 NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
