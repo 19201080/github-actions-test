@@ -53,10 +53,6 @@ jobs:
                   echo "$LOG_CONTENT"
                   echo "env.WARNING_IN_LOG"
                   echo "$WARNING_IN_LOG"
-    commit-and-push:
-        needs: setup-and-run
-        runs-on: ubuntu-latest
-        steps:
             - name: push
               uses: github-actions-x/commit@v2.7
               if: ${{ env.NEW_FILES == true }}
@@ -68,10 +64,6 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
-    send-email:
-        needs: setup-and-run
-        runs-on: ubuntu-latest
-        steps:
             - name: send email
               if: ${{ env.WARNING_IN_LOG == true }}
               run: |
