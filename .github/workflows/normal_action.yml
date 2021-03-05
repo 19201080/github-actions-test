@@ -1,6 +1,12 @@
 name: normal-action
 
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+        inputs:
+            flags:
+                description: 'optional flags: -w, -n'
+                required: false
+                default: '-w'
 
 jobs:
     setup-and-run:
@@ -16,7 +22,7 @@ jobs:
                   pip install -r requirements_dev.txt
                   pip install .
             - name: Run API
-              run: python -m github_actions_test.cli -w
+              run: python -m github_actions_test.cli ${{ github.events.inputs.flags }}
             - name: save git status
               run: |
                   echo "GIT_STATUS<<EOF" >> $GITHUB_ENV
