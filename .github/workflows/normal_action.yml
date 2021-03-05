@@ -24,7 +24,7 @@ jobs:
                   github-token: ${{ secrets.SECRET_TOKEN }}
                   push-branch: 'main'
                   commit-message: 'Update the reports'
-                  force-add: true
+                  force-add: 'true'
                   files: files/
                   name: github-actions
                   email: actions@github.com
