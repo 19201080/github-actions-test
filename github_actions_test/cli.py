@@ -28,7 +28,8 @@ def log_stuff(warning):
 
 
 def create_file(message=None):
-    now = datetime.now().isoformat().split('.')[0]
+    # now = datetime.now().isoformat().split('.')[0]
+    now = 'test_file'
     dir_path = get_path_from_root(DEST_DIRECTORY)
 
     if not os.path.isdir(dir_path):
