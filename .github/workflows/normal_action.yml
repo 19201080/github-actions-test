@@ -17,7 +17,7 @@ jobs:
                   pip install .
             - name: Run API
               # make the api log to a file
-              run: github_actions_test
+              run: python github_actions_test/cli.py
             - name: list files
               run: |
                   pwd
