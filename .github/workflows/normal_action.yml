@@ -17,28 +17,23 @@ jobs:
                   pip install .
             - name: Run API
               run: python -m github_actions_test.cli -w
-            - name: list files
-              run: |
-                  pwd
-                  ls -al
-                  cd files
-                  ls -al
-                  cd ..
             - name: save git status
               run: |
                   echo "GIT_STATUS<<EOF" >> $GITHUB_ENV
                   git status >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
-            - name: check warnings
+            - name: save log content
               run: |
                   echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
                   cat log.log >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
-                  echo "WARNING_IN_LOG=${{ contains(cat log.log, 'WARNING') }}" >> $GITHUB_ENV
-            - name: any new file
+            - name: check for warnings in log
               env:
-                NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
-#                WARNING_IN_LOG: ${{ contains($(cat log.log), 'WARNING') }}
+                  WARNING_IN_LOG: ${{ contains($(cat log.log), 'WARNING') }}
+            - name: check for new files
+              env:
+                  NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
+            - name: log all env variables
               run: |
                   echo "env.GIT_STATUS"
                   echo "$GIT_STATUS"
