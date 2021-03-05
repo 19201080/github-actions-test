@@ -25,9 +25,6 @@ jobs:
                   cd files
                   ls -al
                   cd ..
-            - name: git status
-              run: |
-                  apt install git
                   git status
             - name: push
               uses: github-actions-x/commit@v2.7
