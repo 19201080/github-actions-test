@@ -16,7 +16,7 @@ jobs:
                   pip install -r requirements_dev.txt
                   pip install .
             - name: Run API
-              run: python -m github_actions_test.cli
+              run: python -m github_actions_test.cli -w
             - name: list files
               run: |
                   pwd
