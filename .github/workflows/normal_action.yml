@@ -27,10 +27,6 @@ jobs:
             - name: Run API
               run: |
                   python -m github_actions_test.cli ${{ github.event.inputs.flags }}
-    set-env-variables:
-        needs: setup-and-run
-        runs-on: ubuntu-latest
-        steps:
             - name: save git status
               run: |
                   echo "GIT_STATUS<<EOF" >> $GITHUB_ENV
