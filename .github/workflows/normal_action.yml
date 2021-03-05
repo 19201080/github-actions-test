@@ -18,6 +18,13 @@ jobs:
             - name: Run API
               # make the api log to a file
               run: github_actions_test
+            - name: list files
+              run: |
+                  pwd
+                  ls -al
+                  cd files
+                  ls -al
+                  cd ..
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
@@ -28,4 +35,7 @@ jobs:
                   files: files/test_file
                   name: github-actions
                   email: actions@github.com
+            - name: git status
+              run: |
+                  git status
 
