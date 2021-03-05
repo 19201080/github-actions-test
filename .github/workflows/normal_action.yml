@@ -29,6 +29,12 @@ jobs:
                   echo "GIT_STATUS<<EOF" >> $GITHUB_ENV
                   git status >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
+            - name: check warnings
+              run: |
+                  echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
+                  cat log.log >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+                  echo "WARNING_IN_LOG=${{ contains(env.LOG_CONTENT, 'warning') }}" >> $GITHUB_ENV
             - name: any new file
               env:
                 NEW_FILES: ${{ !contains(env.GIT_STATUS, 'nothing to commit') }}
@@ -37,6 +43,10 @@ jobs:
                   echo "$GIT_STATUS"
                   echo "env.NEW_FILES"
                   echo "$NEW_FILES"
+                  echo "env.LOG_CONTENT"
+                  echo "$LOG_CONTENT"
+                  echo "env.WARNING_IN_LOG"
+                  echo "$WARNING_IN_LOG"
             - name: push
               uses: github-actions-x/commit@v2.7
               with:
