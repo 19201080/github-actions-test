@@ -64,7 +64,16 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
-            - name: send email
-              if: env.WARNING_IN_LOG == 'true' && env.NEW_FILES == 'true'
+            - name: upload warnings
+              if: env.WARNING_IN_LOG == 'true'
+              uses: actions/upload-artifact@v2
+              with:
+                  name: log-file
+                  path: log.log
+#            - name: fail if warning
+#              if: env.WARNING_IN_LOG == 'true'
+#              run: |
+#                  exit 1
+            - name: set exit code
               run: |
-                  exit 1
+                  exit ${{ env.WARNING_IN_LOG == 'true' }}
