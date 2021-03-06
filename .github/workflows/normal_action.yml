@@ -65,6 +65,6 @@ jobs:
                   name: github-actions
                   email: actions@github.com
             - name: send email
-              if: env.WARNING_IN_LOG == 'true'
+              if: env.WARNING_IN_LOG == 'true' && env.NEW_FILES == 'true'
               run: |
-                  echo "warnings in log -> send email step running"
+                  exit 1
