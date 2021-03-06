@@ -64,16 +64,21 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
-            - name: upload warnings
-              if: contains(env.LOG_CONTENT, 'WARNING')
+#            - name: upload warnings
+#              if: contains(env.LOG_CONTENT, 'WARNING')
+#              uses: actions/upload-artifact@v2
+#              with:
+#                  name: log-file.txt
+#                  path: log.log
+            - name: exit with failure
+              if: env.WARNING_IN_LOG == 'true'
               uses: actions/upload-artifact@v2
               with:
                   name: log-file.txt
                   path: log.log
-#            - name: fail if warning
-#              if: env.WARNING_IN_LOG == 'true'
-#              run: |
-#                  exit 1
-            - name: set exit code
               run: |
-                  exit ${{ contains(env.LOG_CONTENT, 'WARNING') }}
+                  exit 1
+            - name: exit with success
+              if: env.WARNING_IN_LOG == 'false'
+              run: |
+                  exit 0
