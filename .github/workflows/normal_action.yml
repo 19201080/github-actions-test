@@ -64,11 +64,13 @@ jobs:
                   files: files/
                   name: github-actions
                   email: actions@github.com
-            - name: exit with warnings
+            - name: upload log if warnings
               if: env.WARNING_IN_LOG == 'true'
               uses: actions/upload-artifact@v2
               with:
                   name: log-file.txt
                   path: log.log
+            - name: fail if warnings
+              if: env.WARNING_IN_LOG == 'true'
               run: |
                   exit 1
