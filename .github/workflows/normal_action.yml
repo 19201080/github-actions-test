@@ -76,4 +76,4 @@ jobs:
 #                  exit 1
             - name: set exit code
               run: |
-                  exit ${{ env.WARNING_IN_LOG == 'true' }}
+                  exit ${{ env.WARNING_IN_LOG }}
