@@ -6,7 +6,7 @@ on:
             flags:
                 description: 'optional flags: -w, -n'
                 required: false
-                default: '-w'
+                default: ''
 
 jobs:
     setup-and-run:
